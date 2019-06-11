@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Messaging.WebApi", "Tiktack.Messages.WebApi\Tiktack.Messaging.WebApi.csproj", "{8001703D-3DC8-419D-98A2-3F715EDB64C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Messaging.DataAccessLayer", "Tiktack.Messaging.DataAccessLayer\Tiktack.Messaging.DataAccessLayer.csproj", "{22B478B7-E394-48E0-A34B-A534F90D5B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Messaging.BusinessLayer", "Tiktack.Messaging.BusinessLayer\Tiktack.Messaging.BusinessLayer.csproj", "{C2C2EE7C-FE16-46A0-98B4-101D467DC077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Common.DataAccessLayer", "Tiktack.Common.DataAccessLayer\Tiktack.Common.DataAccessLayer.csproj", "{2921A806-73DF-408F-952A-E8749A55F502}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DCECD760-78F5-449A-8819-63C3E05C23EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8001703D-3DC8-419D-98A2-3F715EDB64C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8001703D-3DC8-419D-98A2-3F715EDB64C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8001703D-3DC8-419D-98A2-3F715EDB64C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8001703D-3DC8-419D-98A2-3F715EDB64C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22B478B7-E394-48E0-A34B-A534F90D5B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B478B7-E394-48E0-A34B-A534F90D5B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B478B7-E394-48E0-A34B-A534F90D5B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B478B7-E394-48E0-A34B-A534F90D5B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C2EE7C-FE16-46A0-98B4-101D467DC077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C2EE7C-FE16-46A0-98B4-101D467DC077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C2EE7C-FE16-46A0-98B4-101D467DC077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C2EE7C-FE16-46A0-98B4-101D467DC077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2921A806-73DF-408F-952A-E8749A55F502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2921A806-73DF-408F-952A-E8749A55F502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2921A806-73DF-408F-952A-E8749A55F502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2921A806-73DF-408F-952A-E8749A55F502}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8001703D-3DC8-419D-98A2-3F715EDB64C2} = {8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}
+		{22B478B7-E394-48E0-A34B-A534F90D5B23} = {8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}
+		{C2C2EE7C-FE16-46A0-98B4-101D467DC077} = {8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}
+		{2921A806-73DF-408F-952A-E8749A55F502} = {DCECD760-78F5-449A-8819-63C3E05C23EF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0267D919-A7F6-4A1B-AEA8-FE7D58D1413C}
+	EndGlobalSection
+EndGlobal
