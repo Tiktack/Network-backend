@@ -41,5 +41,10 @@ namespace Tiktack.Messaging.BusinessLayer.Providers
                     message.SenderId == id && message.ReceiverId == targetId);
             throw new ArgumentException("User Identifier is wrong");
         }
+
+        public  IEnumerable<Message> GetDialogMessagesById(int id, int targetId) =>
+            _unitOfWork.Messages.GetAll(message =>
+                message.ReceiverId == id && message.SenderId == targetId ||
+                message.SenderId == id && message.ReceiverId == targetId);
     }
 }

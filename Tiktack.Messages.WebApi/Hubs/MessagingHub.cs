@@ -38,7 +38,7 @@ namespace Tiktack.Messaging.WebApi.Hubs
 
         public async Task GetDialogMessages(int targetId)
         {
-            await Clients.Caller.SendAsync("GetDialogMessages", await _messageProvider.GetDialogMessagesByUserIdentifier(Context.UserIdentifier, targetId));
+            await Clients.Caller.SendAsync("GetDialogMessages", _messageProvider.GetDialogMessagesById(int.Parse(Context.UserIdentifier), targetId));
         }
     }
 }
