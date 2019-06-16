@@ -1,6 +1,7 @@
 ﻿using Auth0.AuthenticationApi.Models;
 using AutoMapper;
 using Tiktack.Messaging.DataAccessLayer.Entities;
+using Tiktack.Messaging.WebApi.DTOs;
 
 namespace Tiktack.Messaging.WebApi
 {
@@ -13,6 +14,7 @@ namespace Tiktack.Messaging.WebApi
                 .ForMember(dest => dest.UserIdentifier, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.PictureUrl, opt => opt.MapFrom(src => src.Picture));
             CreateMap<UserInfoDBLayer, UserInfo>();
+            CreateMap<UserInfoDBLayer, UserDTO>();
         }
     }
 }

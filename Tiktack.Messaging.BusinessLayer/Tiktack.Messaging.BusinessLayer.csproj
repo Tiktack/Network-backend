@@ -5,7 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Auth0.AuthenticationApi" Version="6.2.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tiktack.Messaging.DataAccessLayer\Tiktack.Messaging.DataAccessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>..\..\..\..\..\Users\aleh_khantsevich\.nuget\packages\microsoft.identitymodel.tokens\5.4.0\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\..\..\..\..\Users\aleh_khantsevich\.nuget\packages\system.identitymodel.tokens.jwt\5.4.0\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

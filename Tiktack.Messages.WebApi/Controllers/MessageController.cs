@@ -7,7 +7,7 @@ using Tiktack.Messaging.DataAccessLayer.Entities;
 
 namespace Tiktack.Messaging.WebApi.Controllers
 {
-    //[Authorize]
+    [Authorize(AuthenticationSchemes = "self")]
     [Route("api/message")]
     [ApiController]
     public class MessageController : ControllerBase
@@ -26,6 +26,13 @@ namespace Tiktack.Messaging.WebApi.Controllers
         {
             return await _messageProvider.GetDialogMessagesByUserIdentifier(ControllerContext.HttpContext.User.Identity.Name,
                  targetId);
+        }
+
+        [HttpGet("getTest")]
+        public async Task<string> GetTest()
+        {
+            await Task.Delay(12);
+            return "cool";
         }
     }
 }
