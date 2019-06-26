@@ -12,6 +12,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Tiktack.Common.DataAccessLayer.Repositories;
 using Tiktack.Messaging.BusinessLayer.Providers;
@@ -120,6 +121,10 @@ namespace Tiktack.Messaging.WebApi
 
             services.AddDbContext<DbContext, MessagingDBContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<MessagingDBContext>()
+            //    .AddDefaultTokenProviders();
+
 
             //services.AddAuthorization(options => options.AddPolicy("read:messages", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain))));
 
@@ -130,7 +135,7 @@ namespace Tiktack.Messaging.WebApi
             services.AddTransient<IRepository<UserInfoDBLayer>, Repository<UserInfoDBLayer>>();
             services.AddTransient<IRepository<Message>, Repository<Message>>();
             services.AddTransient<IUserProvider, UserProvider>();
-            services.AddTransient<MessageProvider>();
+            services.AddTransient<IMessageProvider, MessageProvider>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSignalR();
         }

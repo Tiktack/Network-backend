@@ -1,11 +1,8 @@
-﻿using Auth0.AuthenticationApi;
-using AutoMapper;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
 using Tiktack.Messaging.BusinessLayer.Providers;
-using Tiktack.Messaging.DataAccessLayer.Entities;
 
 namespace Tiktack.Messaging.WebApi.Hubs
 {
@@ -13,11 +10,11 @@ namespace Tiktack.Messaging.WebApi.Hubs
     public class MessagingHub : Hub
     {
         private readonly IUserProvider _userProvider;
-        private readonly MessageProvider _messageProvider;
+        private readonly IMessageProvider _messageProvider;
         private readonly RequestProvider _requestProvider;
         private readonly IMapper _mapper;
 
-        public MessagingHub(IUserProvider userProvider, MessageProvider messageProvider, RequestProvider requestProvider, IMapper mapper)
+        public MessagingHub(IUserProvider userProvider, IMessageProvider messageProvider, RequestProvider requestProvider, IMapper mapper)
         {
             _userProvider = userProvider;
             _messageProvider = messageProvider;
@@ -27,12 +24,9 @@ namespace Tiktack.Messaging.WebApi.Hubs
 
         public async Task SendDirect(int targetId, string text)
         {
-            //var userIdentifier = await _userProvider.GetUserIdentifierById(targetId);
-            //var callerId = await _userProvider.GetUserIdByIdentifier(Context.UserIdentifier);
-
             var message = await _messageProvider.AddMessage(int.Parse(Context.UserIdentifier), targetId, text);
 
-            await Clients.Caller.SendAsync("UpdateDialog", message);
+            await Clients.Caller.SendAsync("MessageSent", message);
             await Clients.User(targetId.ToString()).SendAsync("UpdateDialog", message);
         }
 
@@ -40,5 +34,11 @@ namespace Tiktack.Messaging.WebApi.Hubs
         {
             await Clients.Caller.SendAsync("GetDialogMessages", _messageProvider.GetDialogMessagesById(int.Parse(Context.UserIdentifier), targetId));
         }
+
+        public async Task GetDialogMessagesWithPage(int targetId, int page)
+        {
+            await Clients.Caller.SendAsync("GetDialogMessagesWithPage", _messageProvider.GetDialogMessagesByIdWithPages(int.Parse(Context.UserIdentifier), targetId, page));
+        }
+
     }
 }

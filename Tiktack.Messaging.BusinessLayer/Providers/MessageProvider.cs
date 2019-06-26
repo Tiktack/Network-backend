@@ -7,7 +7,7 @@ using Tiktack.Messaging.DataAccessLayer.Infrastructure;
 
 namespace Tiktack.Messaging.BusinessLayer.Providers
 {
-    public class MessageProvider
+    public class MessageProvider : IMessageProvider
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IUserProvider _userProvider;
@@ -42,9 +42,18 @@ namespace Tiktack.Messaging.BusinessLayer.Providers
             throw new ArgumentException("User Identifier is wrong");
         }
 
-        public  IEnumerable<Message> GetDialogMessagesById(int id, int targetId) =>
+        public IEnumerable<Message> GetDialogMessagesById(int id, int targetId) =>
             _unitOfWork.Messages.GetAll(message =>
                 message.ReceiverId == id && message.SenderId == targetId ||
                 message.SenderId == id && message.ReceiverId == targetId);
+
+        public IEnumerable<Message> GetDialogMessagesByIdWithPages(int id, int targetId, int page = 0)
+        {
+            var result = _unitOfWork.Messages.GetAll(message =>
+               message.ReceiverId == id && message.SenderId == targetId ||
+               message.SenderId == id && message.ReceiverId == targetId).ToList();
+            var res = result.OrderByDescending(x => x.Id).Skip(page * 10).Take(10);
+            return res;
+        }
     }
 }

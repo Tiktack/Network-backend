@@ -14,5 +14,6 @@ namespace Tiktack.Messaging.BusinessLayer.Providers
         Task<UserInfoDBLayer> Create(UserInfoDBLayer user);
         Task<Tuple<UserInfoDBLayer, string>> Authenticate(string username, string password);
         Task<Tuple<UserInfoDBLayer, string>> GenerateToken(string userIdentifier, string accessToken);
+        Task<UserInfoDBLayer> GetUserByIdentifier(string identifier);
     }
 }

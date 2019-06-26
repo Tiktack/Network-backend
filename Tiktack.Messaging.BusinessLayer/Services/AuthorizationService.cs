@@ -1,42 +1,29 @@
 ﻿using Auth0.AuthenticationApi;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Tiktack.Messaging.BusinessLayer.Providers;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.DataAccessLayer.Infrastructure;
 
-namespace Tiktack.Messaging.BusinessLayer.Providers
+namespace Tiktack.Messaging.BusinessLayer.Services
 {
-    public class UserProvider : IUserProvider
+    public class AuthorizationService
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUserProvider _userProvider;
 
-        public UserProvider(UnitOfWork unitOfWork, IMapper mapper)
+        public AuthorizationService(UnitOfWork unitOfWork, IMapper mapper, IUserProvider userProvider)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }
-
-        public async Task<UserInfoDBLayer> AddOrUpdate(UserInfoDBLayer user)
-        {
-            var userInfoDBLayer =
-                await _unitOfWork.Users.GetAll().FirstOrDefaultAsync(x => x.UserIdentifier == user.UserIdentifier);
-
-            if (userInfoDBLayer == null)
-                return await _unitOfWork.Users.Add(user);
-
-            if (user == userInfoDBLayer)
-                return user;
-
-            user.Id = userInfoDBLayer.Id;
-            return await _unitOfWork.Users.Update(user);
+            _userProvider = userProvider;
         }
 
         public async Task<Tuple<UserInfoDBLayer, string>> Authenticate(string username, string password)
@@ -79,7 +66,7 @@ namespace Tiktack.Messaging.BusinessLayer.Providers
 
                 var mappedUser = _mapper.Map<UserInfoDBLayer>(userInfo);
 
-                user = await Create(mappedUser);
+                user = await _userProvider.Create(mappedUser);
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -96,34 +83,6 @@ namespace Tiktack.Messaging.BusinessLayer.Providers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
             return new Tuple<UserInfoDBLayer, string>(user, tokenString);
-        }
-
-        public async Task<UserInfoDBLayer> Create(UserInfoDBLayer user)
-        {
-            return await _unitOfWork.Users.Add(user);
-        }
-
-        public IEnumerable<UserInfoDBLayer> GetAllUsers()
-        {
-            return _unitOfWork.Users.GetAll();
-        }
-
-        public async Task<string> GetUserIdentifierById(int id)
-        {
-            var user = await _unitOfWork.Users.GetById(id);
-            return user.UserIdentifier;
-        }
-
-        public async Task<int?> GetUserIdByIdentifier(string identifier)
-        {
-            var user = await _unitOfWork.Users.GetAll().FirstOrDefaultAsync(x => x.UserIdentifier == identifier);
-            return user?.Id;
-        }
-
-        public async Task<UserInfoDBLayer> GetUserByIdentifier(string identifier)
-        {
-            var id = int.Parse(identifier);
-            return await _unitOfWork.Users.GetById(id);
         }
     }
 }
