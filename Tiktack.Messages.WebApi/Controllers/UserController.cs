@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Tiktack.Messaging.BusinessLayer.Providers;
 using Tiktack.Messaging.DataAccessLayer.Entities;
-using Tiktack.Messaging.WebApi.Hubs;
+using Tiktack.Messaging.WebApi.DTOs;
 
 namespace Tiktack.Messaging.WebApi.Controllers
 {
@@ -12,28 +14,22 @@ namespace Tiktack.Messaging.WebApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserProvider _userProvider;
         private readonly IMapper _mapper;
-        private readonly RequestProvider _requestProvider;
+        private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public UserController(IUserProvider userProvider, IMapper mapper, RequestProvider requestProvider)
+        public UserController(IMapper mapper, UserManager<ApplicationUser> userManager)
         {
-            _userProvider = userProvider;
+            ;
             _mapper = mapper;
-            _requestProvider = requestProvider;
+            _userManager = userManager;
         }
 
         [HttpGet("getall")]
-        public IEnumerable<UserInfoDBLayer> GetAll()
+        public async Task<IEnumerable<UserDialogsDTO>> GetAll()
         {
-            return _userProvider.GetAllUsers();
+            var users = await _userManager.Users.ToListAsync();
+            return users.Select(user => _mapper.Map<UserDialogsDTO>(user));
         }
-
-        //[HttpPut]
-        //public async Task UpdateUser([FromBody] user)
-        //{
-
-        //}
     }
 }

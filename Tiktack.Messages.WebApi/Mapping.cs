@@ -15,6 +15,9 @@ namespace Tiktack.Messaging.WebApi
                 .ForMember(dest => dest.PictureUrl, opt => opt.MapFrom(src => src.Picture));
             CreateMap<UserInfoDBLayer, UserInfo>();
             CreateMap<UserInfoDBLayer, UserDTO>();
+            CreateMap<ApplicationUser, UserDialogsDTO>()
+                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar.Url))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserName));
         }
     }
 }
