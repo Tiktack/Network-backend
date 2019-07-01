@@ -10,7 +10,6 @@ namespace Tiktack.Messaging.DataAccessLayer.Infrastructure
             : base(options)
         { }
 
-        //public DbSet<UserInfoDBLayer> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }

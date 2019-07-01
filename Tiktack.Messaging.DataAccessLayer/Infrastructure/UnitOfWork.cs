@@ -11,14 +11,12 @@ namespace Tiktack.Messaging.DataAccessLayer.Infrastructure
 
         private bool _disposed;
 
-        public UnitOfWork(DbContext context, IRepository<UserInfoDBLayer> users, IRepository<Message> messages)
+        public UnitOfWork(DbContext context, IRepository<Message> messages)
         {
             _context = (MessagingDBContext)context;
-            Users = users;
             Messages = messages;
         }
 
-        public IRepository<UserInfoDBLayer> Users { get; }
         public IRepository<Message> Messages { get; }
 
         public void Dispose()
