@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.DataAccessLayer.Infrastructure;
 

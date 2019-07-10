@@ -15,7 +15,7 @@ namespace Tiktack.Messaging.WebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(x => x.ListenAnyIP(4000));
+                    //webBuilder.ConfigureKestrel(x => x.ListenAnyIP(4000));
                 });
     }
 }

@@ -3,15 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.WebApi.DTOs;
 
 namespace Tiktack.Messaging.WebApi.Controllers
 {
-    [Route("api/user")]
-    [ApiController]
+    [Route("[controller]/[action]")]
     public class UserController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -25,11 +24,15 @@ namespace Tiktack.Messaging.WebApi.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("getall")]
+        [HttpGet]
         public async Task<IEnumerable<UserDialogsDTO>> GetAll()
         {
             var users = await _userManager.Users.ToListAsync();
-            return users.Select(user => _mapper.Map<UserDialogsDTO>(user));
+            return _mapper.Map<UserDialogsDTO[]>(users);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ApplicationUser> UserDetails() => await _userManager.GetUserAsync(User);
     }
 }
