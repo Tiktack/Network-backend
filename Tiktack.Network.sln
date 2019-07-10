@@ -15,7 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DCECD760-78F5-449A-8819-63C3E05C23EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Common.Core", "Tiktack.Common.Core\Tiktack.Common.Core.csproj", "{B71A3689-0EE4-4ACB-B1B4-C9436369116C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Common.Core", "Tiktack.Common.Core\Tiktack.Common.Core.csproj", "{B71A3689-0EE4-4ACB-B1B4-C9436369116C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1556635E-E39A-4F3B-B0EB-760A837A6E91}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
