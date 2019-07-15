@@ -22,6 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1556
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Messaging.WebApi.UnitTests", "Tiktack.Messaging.WebApi.UnitTests\Tiktack.Messaging.WebApi.UnitTests.csproj", "{91C72E08-0FC1-42D8-A1AB-15336309F4EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F31D95E8-923D-4BB2-8DEB-60E74111FE27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Messaging.BusinessLayer.UnitTests", "Tiktack.Messaging.BussinessLayer.UnitTests\Tiktack.Messaging.BusinessLayer.UnitTests.csproj", "{EEA4A0DE-6509-4027-9123-0F1294FB324C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +54,14 @@ Global
 		{B71A3689-0EE4-4ACB-B1B4-C9436369116C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71A3689-0EE4-4ACB-B1B4-C9436369116C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71A3689-0EE4-4ACB-B1B4-C9436369116C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C72E08-0FC1-42D8-A1AB-15336309F4EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C72E08-0FC1-42D8-A1AB-15336309F4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C72E08-0FC1-42D8-A1AB-15336309F4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C72E08-0FC1-42D8-A1AB-15336309F4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA4A0DE-6509-4027-9123-0F1294FB324C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA4A0DE-6509-4027-9123-0F1294FB324C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA4A0DE-6509-4027-9123-0F1294FB324C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA4A0DE-6509-4027-9123-0F1294FB324C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +72,9 @@ Global
 		{C2C2EE7C-FE16-46A0-98B4-101D467DC077} = {8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}
 		{2921A806-73DF-408F-952A-E8749A55F502} = {DCECD760-78F5-449A-8819-63C3E05C23EF}
 		{B71A3689-0EE4-4ACB-B1B4-C9436369116C} = {DCECD760-78F5-449A-8819-63C3E05C23EF}
+		{91C72E08-0FC1-42D8-A1AB-15336309F4EB} = {F31D95E8-923D-4BB2-8DEB-60E74111FE27}
+		{F31D95E8-923D-4BB2-8DEB-60E74111FE27} = {8F7F8067-A1B1-42F3-BDE1-CCBFAC8127C2}
+		{EEA4A0DE-6509-4027-9123-0F1294FB324C} = {F31D95E8-923D-4BB2-8DEB-60E74111FE27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0267D919-A7F6-4A1B-AEA8-FE7D58D1413C}

@@ -10,7 +10,8 @@ using Tiktack.Messaging.WebApi.DTOs;
 namespace Tiktack.Messaging.WebApi.Controllers
 {
     [Route("[controller]/[action]")]
-    public class AccountController : Controller
+    [ApiController]
+    public class AccountController : ControllerBase
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -28,7 +29,7 @@ namespace Tiktack.Messaging.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<string> Login([FromBody] LoginDTO model)
+        public async Task<string> Login(LoginDTO model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 
@@ -40,7 +41,7 @@ namespace Tiktack.Messaging.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<string> Register([FromBody] RegisterDTO model)
+        public async Task<string> Register(RegisterDTO model)
         {
             var user = new ApplicationUser
             {

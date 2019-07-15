@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Tiktack.Common.Core.Infrastructure.Exceptions;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 
 namespace Tiktack.Messaging.BusinessLayer.Services
@@ -20,6 +21,8 @@ namespace Tiktack.Messaging.BusinessLayer.Services
 
         public string GenerateJwtToken(ApplicationUser user)
         {
+            if (user == null) throw new AppException("User should be not equal null", ExceptionEventType.InvalidParameter);
+
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),

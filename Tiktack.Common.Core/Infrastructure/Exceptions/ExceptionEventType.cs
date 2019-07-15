@@ -2,7 +2,6 @@
 {
     public enum ExceptionEventType
     {
-        OutOfRange,
-        NullReference
+        InvalidParameter
     }
 }

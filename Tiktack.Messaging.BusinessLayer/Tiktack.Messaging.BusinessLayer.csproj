@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tiktack.Common.Core\Tiktack.Common.Core.csproj" />
     <ProjectReference Include="..\Tiktack.Messaging.DataAccessLayer\Tiktack.Messaging.DataAccessLayer.csproj" />
   </ItemGroup>
 
