@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Moq;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -9,20 +8,17 @@ using Tiktack.Messaging.BusinessLayer.Services;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.DataAccessLayer.Entities.UserProperties;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Tiktack.Messaging.BusinessLayer.UnitTests
 {
-    public class AccountServiceTests
+    public class AccountService
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly IAccountService _accountService;
         private readonly ApplicationUser _testUser;
         private readonly IConfiguration _configuration;
 
-        public AccountServiceTests(ITestOutputHelper testOutputHelper)
+        public AccountService()
         {
-            _testOutputHelper = testOutputHelper;
             _testUser = new ApplicationUser
             {
                 Id = "1",
@@ -34,7 +30,7 @@ namespace Tiktack.Messaging.BusinessLayer.UnitTests
             _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.test.json").Build();
 
 
-            _accountService = new AccountService(_configuration);
+            _accountService = new Services.AccountService(_configuration);
         }
 
         [Fact(DisplayName = "GenerateJwtToken() should throw AppException if user equal null")]

@@ -5,7 +5,7 @@ using Tiktack.Messaging.DataAccessLayer.Entities;
 
 namespace Tiktack.Messaging.DataAccessLayer.Infrastructure
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly MessagingDBContext _context;
 

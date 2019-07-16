@@ -138,6 +138,7 @@ namespace Tiktack.Messaging.WebApi
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         private void RegisterDependencies(IServiceCollection services)

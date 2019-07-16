@@ -9,9 +9,9 @@ namespace Tiktack.Messaging.BusinessLayer.Services
 {
     public class MessageService : IMessageService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MessageService(UnitOfWork unitOfWork)
+        public MessageService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
