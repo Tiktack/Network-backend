@@ -30,7 +30,7 @@ namespace Tiktack.Messaging.BusinessLayer.UnitTests
             _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.test.json").Build();
 
 
-            _accountService = new Services.AccountService(_configuration);
+            _accountService = new Services.AccountService(_configuration, null, null);
         }
 
         [Fact(DisplayName = "GenerateJwtToken() should throw AppException if user equal null")]

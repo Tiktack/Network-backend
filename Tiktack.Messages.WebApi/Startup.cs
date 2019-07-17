@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +17,6 @@ using Tiktack.Common.DataAccessLayer.Repositories;
 using Tiktack.Messaging.BusinessLayer.Services;
 using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.DataAccessLayer.Infrastructure;
-using Tiktack.Messaging.WebApi.Helpers;
 using Tiktack.Messaging.WebApi.Hubs;
 
 namespace Tiktack.Messaging.WebApi
@@ -40,7 +38,6 @@ namespace Tiktack.Messaging.WebApi
 
             #region Authentication
 
-            var token = "";
             var domain = $"https://{Configuration["Auth0:Domain"]}/";
             services.AddAuthentication()
                 .AddJwtBearer("auth0", options =>
@@ -53,7 +50,6 @@ namespace Tiktack.Messaging.WebApi
                         OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Query["access_token"];
-                            token = context.Request.Headers["Authorization"].ToString().Split().Last();
                             var path = context.HttpContext.Request.Path;
                             if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/messaging"))
                             {
@@ -81,7 +77,6 @@ namespace Tiktack.Messaging.WebApi
                         OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Query["access_token"];
-                            token = context.Request.Headers["Authorization"].ToString().Split().Last();
                             var path = context.HttpContext.Request.Path;
                             if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/messaging"))
                             {
@@ -94,8 +89,6 @@ namespace Tiktack.Messaging.WebApi
                 });
 
             #endregion
-
-            services.AddScoped(x => new RequestProvider(token));
 
             RegisterServices(services);
         }
@@ -133,7 +126,6 @@ namespace Tiktack.Messaging.WebApi
 
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
             services.AddScoped<UnitOfWork>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAccountService, AccountService>();

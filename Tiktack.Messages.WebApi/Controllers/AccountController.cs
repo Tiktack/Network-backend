@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tiktack.Messaging.BusinessLayer.Services;
-using Tiktack.Messaging.DataAccessLayer.Entities;
 using Tiktack.Messaging.WebApi.DTOs;
 
 namespace Tiktack.Messaging.WebApi.Controllers
@@ -13,47 +9,19 @@ namespace Tiktack.Messaging.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAccountService _accountService;
 
-        public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IAccountService accountService
-            )
+        public AccountController(IAccountService accountService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
             _accountService = accountService;
         }
 
         [HttpPost]
-        public async Task<string> Login(LoginDTO model)
-        {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-
-            if (!result.Succeeded) throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
-
-            var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-            return _accountService.GenerateJwtToken(appUser);
-
-        }
+        public async Task<string> Login(LoginDTO model) =>
+            await _accountService.LoginWithCredentials(model.Email, model.Password);
 
         [HttpPost]
-        public async Task<string> Register(RegisterDTO model)
-        {
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded) throw new ApplicationException(result.Errors.First().Description);
-
-            await _signInManager.SignInAsync(user, false);
-            return _accountService.GenerateJwtToken(user);
-        }
+        public async Task<string> Register(RegisterDTO model) =>
+            await _accountService.Register(model.Email, model.Password);
     }
 }

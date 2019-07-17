@@ -11,6 +11,7 @@ using Tiktack.Messaging.WebApi.DTOs;
 namespace Tiktack.Messaging.WebApi.Controllers
 {
     [Route("[controller]/[action]")]
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IMapper _mapper;
