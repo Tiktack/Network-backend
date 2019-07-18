@@ -33,7 +33,7 @@ namespace Tiktack.Messaging.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<ApplicationUser> UserDetails() => await _userManager.GetUserAsync(User);
+        [Authorize(AuthenticationSchemes = "identity")]
+        public async Task<UserDetailsDTO> UserDetails() => _mapper.Map<UserDetailsDTO>(await _userManager.GetUserAsync(User));
     }
 }
