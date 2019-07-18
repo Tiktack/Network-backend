@@ -33,7 +33,7 @@ namespace Tiktack.Messaging.BusinessLayer.Services
             var result = await _signInManager.PasswordSignInAsync(login, password, false, false);
 
             if (!result.Succeeded)
-                throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+                throw new AppException(ExceptionEventType.LoginFailed);
 
             var appUser = _userManager.Users.SingleOrDefault(r => r.Email == login);
             return GenerateJwtToken(appUser);
@@ -48,7 +48,7 @@ namespace Tiktack.Messaging.BusinessLayer.Services
             };
             var result = await _userManager.CreateAsync(user, password);
 
-            if (!result.Succeeded) throw new ApplicationException(result.Errors.First().Description);
+            if (!result.Succeeded) throw new AppException(result.Errors.First().Description, ExceptionEventType.RegistrationFailed);
 
             await _signInManager.SignInAsync(user, false);
             return GenerateJwtToken(user);

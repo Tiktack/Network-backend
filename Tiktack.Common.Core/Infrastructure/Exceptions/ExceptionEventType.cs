@@ -2,6 +2,8 @@
 {
     public enum ExceptionEventType
     {
-        InvalidParameter
+        InvalidParameter,
+        LoginFailed,
+        RegistrationFailed
     }
 }

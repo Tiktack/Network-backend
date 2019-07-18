@@ -10,5 +10,9 @@ namespace Tiktack.Common.Core.Infrastructure.Exceptions
         {
             ExceptionEvent = exceptionEvent;
         }
+
+        public AppException(ExceptionEventType exceptionEvent) : this(nameof(exceptionEvent), exceptionEvent)
+        {
+        }
     }
 }

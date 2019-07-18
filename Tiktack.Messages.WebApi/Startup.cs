@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tiktack.Common.DataAccessLayer.Repositories;
@@ -142,8 +141,7 @@ namespace Tiktack.Messaging.WebApi
                 options.AddPolicy("AllowSpecificOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000", "http://10.26.7.68:3000",
-                                "http://10.26.7.68:4005", "http://localhost:4005")
+                        builder.WithOrigins(Configuration["AllowedHosts"].Split(','))
                             .AllowAnyMethod()
                             .AllowAnyHeader()
                             .AllowCredentials();
