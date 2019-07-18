@@ -94,7 +94,13 @@ namespace Tiktack.Messaging.WebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+                app.UseHsts();
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -141,7 +147,7 @@ namespace Tiktack.Messaging.WebApi
                 options.AddPolicy("AllowSpecificOrigin",
                     builder =>
                     {
-                        builder.WithOrigins(Configuration["AllowedHosts"].Split(','))
+                        builder.WithOrigins(Configuration["FrontApplication"])
                             .AllowAnyMethod()
                             .AllowAnyHeader()
                             .AllowCredentials();
