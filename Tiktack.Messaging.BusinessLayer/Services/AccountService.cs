@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -38,6 +40,30 @@ namespace Tiktack.Messaging.BusinessLayer.Services
             var appUser = _userManager.Users.SingleOrDefault(r => r.Email == login);
             return GenerateJwtToken(appUser);
         }
+
+        public async Task<string> LoginWithExternalIdentifier(string identifier)
+        {
+            var column = ChooseProvider(identifier);
+            var user = _userManager.Users.AsQueryable().First(x => EF.Property<string>(x.Identifiers, nameof(column)) == identifier);
+            await _signInManager.SignInAsync(user, new AuthenticationProperties());
+
+            return GenerateJwtToken(user);
+        }
+
+
+        private static LoginProviderType ChooseProvider(string identifier)
+        {
+            var str = identifier.Split().First();
+
+            return str switch
+            {
+                nameof(LoginProviderType.Google) => LoginProviderType.Google,
+                nameof(LoginProviderType.VK) => LoginProviderType.VK,
+                nameof(LoginProviderType.LinkedIn) => LoginProviderType.LinkedIn,
+                _ => throw new AppException(ExceptionEventType.InvalidParameter)
+            };
+        }
+
 
         public async Task<string> Register(string email, string password)
         {

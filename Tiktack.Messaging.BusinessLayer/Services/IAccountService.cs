@@ -8,5 +8,6 @@ namespace Tiktack.Messaging.BusinessLayer.Services
         string GenerateJwtToken(ApplicationUser user);
         Task<string> LoginWithCredentials(string login, string password);
         Task<string> Register(string email, string password);
+        Task<string> LoginWithExternalIdentifier(string identifier);
     }
 }

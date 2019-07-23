@@ -6,5 +6,6 @@ namespace Tiktack.Messaging.DataAccessLayer.Entities
     public class ApplicationUser : IdentityUser
     {
         public Avatar Avatar { get; set; }
+        public UserIdentifiers Identifiers { get; set; }
     }
 }
